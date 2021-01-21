@@ -1,0 +1,17 @@
+eventHub: 
+  inbound: 
+    connectionString: "Endpoint=sb://new-event-poc-json.servicebus.windows.net/;SharedAccessKeyName=policy_pkg_delay_outbound;SharedAccessKey=3SLt/mQZD0yXaIBqDXfzzywS/CM6CZs0IQdD1TaAxp8=;EntityPath=pkg_delay_outbound_eventhub"
+    name: "pkg_delay_outbound_eventhub"
+  outbound: 
+    connectionString: "Endpoint=sb://new-event-poc-json.servicebus.windows.net/;SharedAccessKeyName=policy_pkg_delay_outbound;SharedAccessKey=3SLt/mQZD0yXaIBqDXfzzywS/CM6CZs0IQdD1TaAxp8=;EntityPath=pkg_delay_outbound_eventhub"
+    name: "pkg_delay_outbound_eventhub"
+  storage: 
+    consumerGroupName: $Default
+    storageConnectionString: "DefaultEndpointsProtocol=https;AccountName=eventhubjmssa;AccountKey=zFGk6rfDl3/y2KxKi/NWMYtGoC4NfYss+FRcXJJ5jbtbK3JGkO2B5gA4G3823nn7G00sCVZvb7lmpErRN1sdJA==;EndpointSuffix=core.windows.net"
+    storageContainerName: "tojms"
+logging: 
+  level: 
+    com.microsoft.azure.*: ERROR
+    com.azure.*: ERROR
+server:
+  port : 8081
