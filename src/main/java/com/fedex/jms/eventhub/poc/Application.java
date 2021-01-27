@@ -30,7 +30,7 @@ public class Application {
 	         t.printStackTrace();
 	       });
 		configurer.configure(factory, connectionFactory);
-		// You could still override some of Boot's default if necessary.
+		// You could still override some of Boot's default if necessary.aa
 		return factory;
 	}
     
