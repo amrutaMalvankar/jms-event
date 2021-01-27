@@ -54,24 +54,21 @@ public class MessageData {
 		try {
 			URL path = MessageData.class.getClassLoader().getResource("SampleCSVFile.csv");
 			File input = new File(path.toURI());
-			
-			    File output = new File("/Users/name/output.json");
 
-			    CsvSchema csvSchema = CsvSchema.builder().setUseHeader(true).build();
-			    CsvMapper csvMapper = new CsvMapper();
+			File output = new File("/Users/name/output.json");
 
-			    // Read data from CSV file
-			    List<Object> readAll = csvMapper.readerFor(Map.class).with(csvSchema).readValues(input).readAll();
+			CsvSchema csvSchema = CsvSchema.builder().setUseHeader(true).build();
+			CsvMapper csvMapper = new CsvMapper();
 
-			    ObjectMapper mapper = new ObjectMapper();
-			    mapper.configure(JsonGenerator.Feature.QUOTE_NON_NUMERIC_NUMBERS, true);
+			ObjectMapper mapper = new ObjectMapper();
+			mapper.configure(JsonGenerator.Feature.QUOTE_NON_NUMERIC_NUMBERS, true);
 
+			// Read data from CSV file
+			List<Object> readAll = csvMapper.readerFor(Map.class).with(csvSchema).readValues(input).readAll();
+			log.info("******************* List in readAll *********** :: " + readAll);
 
-			    // Write JSON formated data to output.json file
-			    mapper.writerWithDefaultPrettyPrinter().writeValue(output, readAll); 
-			    
-			    csvMapper.configure(JsonGenerator.Feature.QUOTE_NON_NUMERIC_NUMBERS, true);
-			   
+			// mapper.writerWithDefaultPrettyPrinter().writeValue(output, readAll);
+
 			MappingIterator<Map<?, ?>> mappingIterator = csvMapper.reader().forType(Map.class).with(csvSchema)
 					.readValues(input);
 			List<Map<?, ?>> list = mappingIterator.readAll();
@@ -84,7 +81,6 @@ public class MessageData {
 		return null;
 	}
 
-	
 	public static final void readCSVTestData() {
 
 		URL path = MessageData.class.getClassLoader().getResource("com/fedex/jms/poc/SampleCSVFile.csv");

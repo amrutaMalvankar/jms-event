@@ -34,14 +34,14 @@ public class RESTController {
 	public ResponseEntity<String> sendMsgToInboundJms() {
 		try {
 			String message = null;
-			List<Map<?, ?>> dataList = MessageData.covertCSVDataToList();
+			List<Map<?, ?>> dataList = MessageData.withQuotesCovertCSVDataToList();
 			if (dataList != null && !dataList.isEmpty()) {
 				dataList.forEach(msg -> 
 				jmsSender.sendMsgToJmsQueue(JmsEventHubConstants.INBOUND_QUEUE_NAME, msg.toString())
 				);
 				//message = jmsSender.sendMsgToJmsQueue(JmsEventHubConstants.INBOUND_QUEUE_NAME, dataList.toString());
 			}
-			return new ResponseEntity<String>("csv file:: \n " + message + "  \n is sent in jms queue :: "
+			return new ResponseEntity<String>("Messages are sent in jms queue :: "
 					+ JmsEventHubConstants.INBOUND_QUEUE_NAME, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
